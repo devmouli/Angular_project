@@ -11,6 +11,7 @@ phases:
       java: openjdk8
   pre_build:
     commands:
+      - echo "Installing updates"
       - apt-get update
       - apt-get install -y jq
       - wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
@@ -21,6 +22,7 @@ phases:
       - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
   build:
     commands:
+      - echo "Entered the build stage"
       - mvn test     
       - mvn sonar:sonar -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
       - sleep 5
