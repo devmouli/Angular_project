@@ -1,10 +1,10 @@
 version: 0.2
-env:
-  secrets-manager:
-    LOGIN: "8b7a9c786e83ee99c064587a3c272f7a91696223"
-    HOST: "https://sonarcloud.io"
-    Organization: "chinnumouli"
-    Project: "PoraRei"
+# env:
+#   secrets-manager:
+#     LOGIN: "8b7a9c786e83ee99c064587a3c272f7a91696223"
+#     HOST: "https://sonarcloud.io"
+#     Organization: "chinnumouli"
+#     Project: "PoraRei"
 phases:
   install:
     runtime-versions:
@@ -24,8 +24,8 @@ phases:
     commands:
       - echo "Entered the build stage"
       - mvn test     
-      - mvn sonar:sonar -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
+      - mvn sonar:sonar -Dsonar.login="8b7a9c786e83ee99c064587a3c272f7a91696223" -Dsonar.host.url="https://sonarcloud.io" -Dsonar.projectKey="PoraRei" -Dsonar.organization="chinnumouli"
       - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey="PoraRei" >result.json
       - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
